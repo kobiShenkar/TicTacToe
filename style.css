@@ -1,0 +1,41 @@
+.table-game{
+	margin:0px auto;
+	border-collapse:collapse;
+}
+
+.table-game td{
+	width:100px;
+	height:100px;
+	border:1px solid black;
+	text-align:center;
+	font-size:36px;	
+	cursor:pointer;
+}
+.table-game td:hover{
+    background: #ccc;
+    
+}
+
+.table-game td.ocupied{
+	cursor:default;
+}
+
+h1{
+	text-align:center;
+	margin-bottom:50px;
+}
+
+.button-wrapper{
+	text-align:center;
+	margin-top:50px;
+}
+
+.button-clear{
+	font-size:18px;
+	padding:10px;
+	cursor:pointer;
+}
+
+.marked{
+	color:red;
+}
