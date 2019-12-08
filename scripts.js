@@ -175,4 +175,3 @@ let objGame = new TicTacToeGame();
 objGame.initGame("table_game");
 
 
-// new
