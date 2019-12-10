@@ -83,27 +83,12 @@ function TicTacToeGame() {
     function checkWin() {
         var t0 = performance.now();
 
-        // const cellsArr = [...table.lastChild.children]
-        // let elementTrArr = [];
-        // for (let i = 0; i < cellsArr.length; i++) {
-        //     let elementTr = [...cellsArr[i].children]
-        //     elementTrArr = [...elementTrArr, [...elementTr]];
-        // }
-
-        let horizontalArr = [[], [], []];
+        let horizontalArr = [];
         let verticalArr = [[], [], []];
         let slantArr = [[], []];
         for (let i = 0; i < new_cells.length; i++) {
 
-            if (i < 3) {
-                horizontalArr[0].push(new_cells[i].innerText);
-            }
-            if (i >= 3 || i <= 5) {
-                horizontalArr[1].push(new_cells[i].innerText);
-            }
-            if (i > 5) {
-                horizontalArr[2].push(new_cells[i].innerText);
-            }
+            horizontalArr.push(new_cells[i].innerText);
 
             if (i % 4 === 0) { //slantArr_0
                 slantArr[0].push(new_cells[i].innerText);
@@ -111,68 +96,75 @@ function TicTacToeGame() {
             if (i % 2 === 0 && i !== 0 && i !== 8) { //slantArr_1
                 slantArr[1].push(new_cells[i].innerText);
             }
-            // start from here
             if (i % 3 === 0) { // verticalArr_column_1 
                 verticalArr[0].push(new_cells[i].innerText);
-            } else if (j === 1) {  // verticalArr_column_2
-                verticalArr[1].push(elementTrArr[i][j].innerText);
-            } else if (j === 2) {  // verticalArr_column_3
-                verticalArr[2].push(elementTrArr[i][j].innerText);
             }
+            if (i % 3 === 1) {  // verticalArr_column_2
+                verticalArr[1].push(new_cells[i].innerText);
+            }
+            if (i % 3 === 2) {  // verticalArr_column_3
+                verticalArr[2].push(new_cells[i].innerText);
 
-            if (j === 2 && elementTrArr[i][j].innerText !== "") {
-                if (horizontalArr.every((val, i, arr) => val === arr[0])) { // if horizontalArr have equals values -> win
-                    console.log("win in row: ", i + 1, horizontalArr);
-                    var t1 = performance.now();
-                    console.log("Call took " + (t1 - t0) + " milliseconds.");
-                    alert("win")
-                    return;
+                if (horizontalArr[i] !== "") {
+                    if (horizontalArr.every((val, i, arr) => val === arr[0])) { // if horizontalArr have equals values -> win
+                        console.log("win row: ", horizontalArr);
+                        var t1 = performance.now();
+                        console.log("Call took " + (t1 - t0) + " milliseconds.");
+                        alert("win")
+                        return;
+                    } else {
+                        horizontalArr = [];
+                    }
+                } else {
+                    horizontalArr = [];
                 }
             }
-            if (i === 2) {
-                if (!verticalArr[0].includes("") && verticalArr[0].every((val, i, arr) => val === arr[0])) { // if verticalArr have equals values -> win
-                    console.log("win in column: ", j + 1, verticalArr[0]);
-                    var t1 = performance.now();
-                    console.log("Call took " + (t1 - t0) + " milliseconds.");
-                    alert("win")
-                    return;
-                }
-                if (!slantArr[1].includes("") && slantArr[1].every((val, i, arr) => val === arr[0])) {
-                    console.log("win in slant right: ", slantArr[1]);
-                    var t1 = performance.now();
-                    console.log("Call took " + (t1 - t0) + " milliseconds.");
-                    alert("win")
-                    return;
-                }
-            }
-            if (i === 2 && j === 1 && !verticalArr[1].includes("")) {
-                if (verticalArr[j].every((val, i, arr) => val === arr[0])) { // if verticalArr have equals values -> win
-                    console.log("win in column: ", j + 1, verticalArr[j]);
-                    var t1 = performance.now();
-                    console.log("Call took " + (t1 - t0) + " milliseconds.");
-                    alert("win")
-                    return;
-                }
-            }
-            if (i === 2 && j === 2) {
-                if (!verticalArr[2].includes("") && verticalArr[j].every((val, i, arr) => val === arr[0])) { // if verticalArr have equals values -> win
-                    console.log("win in column: ", j + 1, verticalArr[j]);
-                    var t1 = performance.now();
-                    console.log("Call took " + (t1 - t0) + " milliseconds.");
-                    alert("win")
-                    return;
-                }
+            // if (i === 2) {
+            //     if (!verticalArr[0].includes("") && verticalArr[0].every((val, i, arr) => val === arr[0])) { // if verticalArr have equals values -> win
+            //         console.log("win in column: ", j + 1, verticalArr[0]);
+            //         var t1 = performance.now();
+            //         console.log("Call took " + (t1 - t0) + " milliseconds.");
+            //         alert("win")
+            //         return;
+            //     }
+            //     if (!slantArr[1].includes("") && slantArr[1].every((val, i, arr) => val === arr[0])) {
+            //         console.log("win in slant right: ", slantArr[1]);
+            //         var t1 = performance.now();
+            //         console.log("Call took " + (t1 - t0) + " milliseconds.");
+            //         alert("win")
+            //         return;
+            //     }
+            // }
+            // if (i === 2 && j === 1 && !verticalArr[1].includes("")) {
+            //     if (verticalArr[j].every((val, i, arr) => val === arr[0])) { // if verticalArr have equals values -> win
+            //         console.log("win in column: ", j + 1, verticalArr[j]);
+            //         var t1 = performance.now();
+            //         console.log("Call took " + (t1 - t0) + " milliseconds.");
+            //         alert("win")
+            //         return;
+            //     }
+            // }
+            // if (i === 2 && j === 2) {
+            //     if (!verticalArr[2].includes("") && verticalArr[j].every((val, i, arr) => val === arr[0])) { // if verticalArr have equals values -> win
+            //         console.log("win in column: ", j + 1, verticalArr[j]);
+            //         var t1 = performance.now();
+            //         console.log("Call took " + (t1 - t0) + " milliseconds.");
+            //         alert("win")
+            //         return;
+            //     }
 
-                if (!slantArr[0].includes("") && slantArr[0].every((val, i, arr) => val === arr[0])) { // if slantArr have equals values -> win
-                    console.log("win in slant left: ", slantArr[0]);
-                    var t1 = performance.now();
-                    console.log("Call took " + (t1 - t0) + " milliseconds.");
-                    alert("win")
-                    return;
-                }
-            }
+            //     if (!slantArr[0].includes("") && slantArr[0].every((val, i, arr) => val === arr[0])) { // if slantArr have equals values -> win
+            //         console.log("win in slant left: ", slantArr[0]);
+            //         var t1 = performance.now();
+            //         console.log("Call took " + (t1 - t0) + " milliseconds.");
+            //         alert("win")
+            //         return;
+            //     }
+            // }
         }
-        // console.log(verticalArr);
+        console.log(horizontalArr);
+        console.log(verticalArr);
+        console.log(slantArr);
         var t1 = performance.now();
         console.log("Call took " + (t1 - t0) + " milliseconds.");
     }
